@@ -21,8 +21,8 @@
             const loadTemplate = async (viewId, filePath) => {
                 const view = document.getElementById(viewId);
                 try {
-                    const response = await fetch(filePath);
-                    if (!response.ok) throw new Error(`Could not load ${filePath}`);
+                    const response = await fetch(filePath); 
+                    if (!response.ok) throw new Error(`Could not load ${filePath} - Status: ${response.status}`);
                     view.innerHTML = await response.text();
                 } catch (error) {
                     view.innerHTML = `<p style="text-align:center;color:red;">Error loading content: ${error.message}</p>`;
@@ -35,6 +35,56 @@
                 return new Promise((resolve, reject) => {
                     const script = document.createElement('script');
                     script.src = filePath;
+                    script.onload = () => resolve();
+                    script.onerror = () => reject(new Error(`Script load error for ${filePath}`));
+                    document.body.appendChild(script);
+                });
+            };
+
+            // Load both templates simultaneously from inside the public folder
+            await Promise.all([
+                loadTemplate('frontend-view', './templates/frontend.html'),
+                loadTemplate('admin-panel', './templates/admin.html')
+            ]);
+            
+            // Now that HTML is loaded, load the scripts IN ORDER
+            await loadScript('./assets/js/app.js');
+            await loadScript('./assets/js/admin.js');
+
+            // Finally, initialize the applications
+            applySeoSettings();
+            frontend.init();
+            
+            // Attach event listeners for view switching and animations
+            const attachGlobalListeners = () => {
+                const showAdminLink = document.getElementById('show-admin-panel-link');
+                const backToFrontendBtn = document.getElementById('back-to-frontend-btn');
+
+                if(showAdminLink) {
+                    showAdminLink.addEventListener('click', e => { 
+                        e.preventDefault(); 
+                        document.getElementById('frontend-view').classList.add('hidden'); 
+                        document.getElementById('admin-panel').classList.remove('hidden'); 
+                        adminPanel.init(); 
+                    });
+                }
+                if(backToFrontendBtn) {
+                     backToFrontendBtn.addEventListener('click', e => { 
+                        e.preventDefault(); 
+                        document.getElementById('admin-panel').classList.add('hidden'); 
+                        document.getElementById('frontend-view').classList.remove('hidden'); 
+                    });
+                }
+
+                document.querySelectorAll('.btn-buy, .btn-footer, .action-button, .form-btn, .recharge-option, .install-button, #admin-panel .btn-save, #admin-panel .nav-item, #admin-panel .btn-edit, #admin-panel .btn-edit-save, #admin-panel .list-item, #admin-panel .tab, #admin-panel .back-btn')
+                    .forEach(button => button.addEventListener("mousedown", createRipple));
+            };
+
+            attachGlobalListeners();
+        });
+    </script>
+</body>
+</html>                    script.src = filePath;
                     script.onload = () => resolve();
                     script.onerror = () => reject(new Error(`Script load error for ${filePath}`));
                     document.body.appendChild(script);
