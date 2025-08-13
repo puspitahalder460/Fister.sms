@@ -1,7 +1,6 @@
 /* Universal Helper & Base Styles */
 .hidden { display: none !important; }
 body { font-family: 'Roboto', sans-serif; margin: 0; }
-
 /* --- START: ORIGINAL FRONTEND CSS --- */
 #frontend-view { background-color: #f8f9fa; }
 #frontend-view #login-section { background-color: #f6f5ff; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; transition: opacity 0.5s ease-out; }
@@ -35,6 +34,87 @@ body { font-family: 'Roboto', sans-serif; margin: 0; }
 #frontend-view .sidebar nav { flex-grow: 1; overflow-y: auto; }
 #frontend-view .nav-section { margin-top: 25px; } #frontend-view .nav-section-title { font-size: 12px; font-weight: 700; color: var(--secondary-text); text-transform: uppercase; margin-bottom: 15px; padding: 0 10px; }
 #frontend-view .nav-list { list-style: none; padding: 0; margin: 0; } #frontend-view .nav-item a { display: flex; align-items: center; padding: 12px 10px; text-decoration: none; color: var(--primary-text); font-size: 16px; border-radius: 8px; margin-bottom: 5px; font-weight: 500; cursor: pointer; }
+#frontend-view .nav-item img { width: 22px; margin-right: 15px; opacity: 0.7; }
+#frontend-view .nav-item.active a { background-color: var(--primary-blue); color: white; } #frontend-view .nav-item.active img { opacity: 1; filter: brightness(0) invert(1); }
+#frontend-view .nav-item:not(.active):hover a { background-color: #f0f0f0; }
+#frontend-view .sidebar-footer { background: linear-gradient(135deg, #e4f0ff, #f6faff); border-radius: var(--border-radius); padding: 15px; text-align: center; }
+#frontend-view .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; }
+#frontend-view .overlay.open { opacity: 1; pointer-events: auto; }
+#frontend-view .header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: var(--card-white); }
+#frontend-view .menu-icon { font-size: 24px; cursor: pointer; padding: 5px; }
+#frontend-view .header-right { display: flex; align-items: center; gap: 15px; }
+#frontend-view .header-balance { display: flex; align-items: center; background-color: #f5f5f5; border-radius: 20px; padding: 6px 12px 6px 8px; font-weight: 500; }
+#frontend-view .coin-icon { background: #ffc107; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 8px; font-weight: bold; }
+#frontend-view .profile-img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #eee; }
+#frontend-view .page-content { display: none; } #frontend-view .page-content.active { display: block; }
+#frontend-view .card { background-color: var(--card-white); border-radius: var(--border-radius); padding: 25px; margin: 20px 15px 0; box-shadow: var(--box-shadow); }
+#frontend-view .wallet-card .wallet-title { font-size: 14px; color: var(--secondary-text); margin: 0 0 10px 0; font-weight: 500; text-transform: uppercase; }
+#frontend-view .wallet-card .wallet-amount { font-size: 28px; font-weight: 700; margin: 0; word-break: break-all; color: var(--primary-text); }
+#frontend-view .action-buttons { display: flex; justify-content: space-around; margin-top: 25px; text-align: center; } 
+#frontend-view .action-button .icon-wrapper { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 8px auto; }
+#frontend-view .action-button .icon-wrapper img { width: 24px; height: 24px; }
+#frontend-view .action-button span { font-size: 14px; font-weight: 500; color: var(--primary-text); }
+#frontend-view .action-button .recharge { background-color: #e0f8e9; }
+#frontend-view .action-button .otp { background-color: #e4eefe; }
+#frontend-view .action-button .history { background-color: #f1f1f1; }
+#frontend-view .action-button .transactions { background-color: #fff4e0; }
+#frontend-view .stats-card { display: flex; align-items: center; gap: 20px; }
+#frontend-view .stats-card .icon-wrapper { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+#frontend-view .stats-card .icon-wrapper img { width: 24px; height: 24px; }
+#frontend-view .stats-card .stats-info .title { font-size: 14px; color: var(--secondary-text); margin: 0 0 5px 0; }
+#frontend-view .stats-card .stats-info .value { font-size: 22px; font-weight: 700; margin: 0; color: var(--primary-text); }
+#frontend-view .stats-card .recharge-stat { background-color: #e4eefe; }
+#frontend-view .stats-card .purchase-stat { background-color: #dff6ff; }
+#frontend-view .install-banner { display: flex; justify-content: space-between; align-items: center; background-color: #f0f5ff; padding: 20px; }
+#frontend-view .install-banner h3 { font-size: 16px; margin: 0 0 15px 0; line-height: 1.4; }
+#frontend-view .install-banner .install-button { background-color: var(--primary-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; }
+#frontend-view .install-banner .phone-image { width: 100px; height: auto; }
+#frontend-view .buy-number-card h2 { font-size: 24px; margin-top: 0; margin-bottom: 25px; }
+#frontend-view .select-wrapper { position: relative; margin-bottom: 20px; }
+#frontend-view .select-wrapper label { font-size: 13px; color: var(--secondary-text); margin-bottom: 8px; display: block; padding-left: 5px;}
+#frontend-view .select-wrapper .select-box { display: flex; align-items: center; width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+#frontend-view .select-wrapper .select-box img { width: 24px; margin-right: 10px; }
+#frontend-view .select-wrapper select { border: none; outline: none; background: transparent; width: 100%; appearance: none; -webkit-appearance: none; font-size: 16px; font-weight: 500; cursor: pointer; }
+#frontend-view .select-wrapper .select-arrow { position: absolute; right: 15px; top: 60%; transform: translateY(-50%); pointer-events: none; }
+#frontend-view .btn-buy { width: 100%; background-color: var(--primary-blue); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+#frontend-view .btn-buy img { filter: brightness(0) invert(1); }
+#frontend-view .info-card { display: flex; align-items: center; justify-content: space-between; background-color: #fffaf0; padding: 20px; }
+#frontend-view .info-card-text h3 { margin: 0 0 5px 0; font-size: 20px; } #frontend-view .info-card-text p { margin: 0; color: var(--secondary-text); font-size: 16px; }
+#frontend-view .info-card-img { width: 120px; height: auto; }
+#frontend-view .active-number-card { margin: 20px 15px 0; }
+#frontend-view .active-number-header { display: flex; align-items: center; justify-content: space-between; }
+#frontend-view .active-number-info { display: flex; align-items: center; gap: 15px; }
+#frontend-view .service-icon { width: 44px; height: 44px; border-radius: 50%; background-color: #a9b8c3; color: white; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: bold; }
+#frontend-view .number-details .number { font-size: 18px; font-weight: 500; }
+#frontend-view .number-details .service-name { font-size: 14px; color: var(--secondary-text); }
+#frontend-view .copy-icon { cursor: pointer; width: 24px; opacity: 0.6; }
+#frontend-view .waiting-box { background-color: #f8f9fa; border-radius: 10px; padding: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; min-height: 60px; }
+#frontend-view .waiting-box .status-text { font-size: 16px; color: var(--secondary-text); }
+#frontend-view .otp-code { font-size: 18px; font-weight: 500; letter-spacing: 2px; }
+#frontend-view .timer { background-color: #e9ecef; color: var(--secondary-text); padding: 5px 12px; border-radius: 15px; font-weight: 500; display: flex; align-items: center; gap: 5px; }
+#frontend-view .timer img { width: 16px; opacity: 0.7; }
+#frontend-view .action-buttons-footer { display: flex; gap: 15px; margin-top: 20px; }
+#frontend-view .btn-footer { flex: 1; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 0.2s; }
+#frontend-view .btn-next { background-color: #e7f0ff; color: #4a80ff; border: 1px solid #cce0ff; }
+#frontend-view .btn-cancel { background-color: #fff0f1; color: #e53935; border: 1px solid #ffccd0; }
+#frontend-view .recharge-methods-card .recharge-options { list-style: none; padding: 0; margin-top: 20px; }
+#frontend-view .recharge-methods-card .recharge-option { display: flex; align-items: center; padding: 15px; border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; cursor: pointer; }
+#frontend-view .recharge-option .option-icon { margin-right: 15px; }
+#frontend-view .recharge-option .option-icon img { width: 40px; height: 40px; }
+#frontend-view .recharge-option .option-details { flex-grow: 1; }
+#frontend-view .recharge-option .option-details .title { font-weight: 700; }
+#frontend-view .recharge-option .option-details .subtitle { color: var(--secondary-text); font-size: 14px; }
+#frontend-view .recharge-option .arrow-icon { font-size: 24px; color: var(--secondary-text); }
+.wallet-notification { position: fixed; bottom: 20px; left: 50%; background: #4b36cc; color: white; padding: 12px 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10001; opacity: 0; transform: translateX(-50%) translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.wallet-notification.error { background: #e74c3c; }
+
+/* --- UX/Animation Enhancements --- */
+.form-group input, .form-group select, .form-group textarea { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #4b36cc; box-shadow: 0 0 0 3px rgba(75, 54, 204, 0.15); }
+.btn-buy, .btn-footer, .action-button, .form-btn, .recharge-option, .install-button, #admin-panel .btn-save, #admin-panel .nav-item, #admin-panel .btn-edit, #admin-panel .btn-edit-save, #admin-panel .list-item, #admin-panel .tab, #admin-panel .back-btn { position: relative; overflow: hidden; z-index: 1; -webkit-tap-highlight-color: transparent; }
+span.ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple-animation 0.6s linear; background-color: rgba(255, 255, 255, 0.7); }
+#admin-panel .list-item span.ripple, #admin-panel .tab span.ripple { background-color: rgba(0, 0, 0, 0.1); }
+@keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }#frontend-view .nav-list { list-style: none; padding: 0; margin: 0; } #frontend-view .nav-item a { display: flex; align-items: center; padding: 12px 10px; text-decoration: none; color: var(--primary-text); font-size: 16px; border-radius: 8px; margin-bottom: 5px; font-weight: 500; cursor: pointer; }
 #frontend-view .nav-item img { width: 22px; margin-right: 15px; opacity: 0.7; }
 #frontend-view .nav-item.active a { background-color: var(--primary-blue); color: white; } #frontend-view .nav-item.active img { opacity: 1; filter: brightness(0) invert(1); }
 #frontend-view .nav-item:not(.active):hover a { background-color: #f0f0f0; }
