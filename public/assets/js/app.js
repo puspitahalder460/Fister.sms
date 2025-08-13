@@ -1,40 +1,25 @@
-// ===== Shared Helpers =====
-const DB_KEY = 'fisterSMS_db_v11_dynamic_api';
-const getInitialDB = () => ({
-    servers: [
-        {
-            id: 1672531200001,
-            serverName: '5sim Demo',
-            serverCountryCode: 'ru',
-            apiKey: 'YOUR_API_KEY_HERE',
-            apiGetNumberUrl: 'https://5sim.net/v1/user/buy/activation',
-            apiGetMessageUrl: 'https://5sim.net/v1/user/check',
-            apiCancelUrl: 'https://5sim.net/v1/user/cancel',
-            apiBanUrl: 'https://5sim.net/v1/user/ban'
+const frontend = {
+    // ... all original frontend methods EXCEPT ...
+
+    handleBuySubmit: async function(e) {
+        e.preventDefault();
+        const serviceSelect = document.querySelector('#service-select');
+        const price = parseFloat(serviceSelect.selectedOptions[0].dataset.price);
+        
+        // REAL 5SIM API CALL
+        const response = await fetch(`https://5sim.net/v1/user/buy/activation/${country}/${operator}/${service}`, {
+            headers: { 'Authorization': 'Bearer YOUR_5SIM_API_KEY' }
+        });
+        const data = await response.json();
+        
+        if(data.phone) {
+            this.createActiveNumberCard(serviceSelect, data);
+            showMessage(`Real number purchased: ${data.phone}`);
         }
-    ],
-    services: [
-        {
-            id: 1672531200003,
-            serverId: 1672531200001,
-            serviceName: 'Telegram',
-            servicePrice: "20",
-            serviceCode: 'telegram',
-            country: 'russia',
-            operator: 'any'
-        }
-    ],
-    seo: { websiteTitle: 'FisterSMS', websiteDescription: 'Buy phone numbers for OTP verification.'},
-    analytics: { todaysUsers: 2, totalUsers: 2, todaysOrders: 0, todaysPayment: 0 }
-});
-let db = JSON.parse(localStorage.getItem(DB_KEY)) || getInitialDB();
-const saveData = () => {
-    db.services.forEach(s => s.serverId = parseInt(s.serverId));
-    localStorage.setItem(DB_KEY, JSON.stringify(db));
-    if (frontend.isInitialized) frontend.populateServers();
-    if (typeof adminPanel !== "undefined" && adminPanel.isInitialized) adminPanel.updateAnalyticsDisplay();
-};
-if (!localStorage.getItem(DB_KEY)) saveData();
+    },
+
+    // ... keep all other methods exactly the same ...
+};if (!localStorage.getItem(DB_KEY)) saveData();
 
 const sanitizeHTML = str => {
     if(!str) return "";
