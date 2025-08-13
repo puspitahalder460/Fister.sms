@@ -15,8 +15,8 @@
     <div id="admin-panel" class="hidden"></div>
 
     <!-- Main script to load and initialize everything -->
-    <script src="./assets/js/admin.js"></script>
     <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/admin.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
             // Function to load HTML templates into the main containers
@@ -35,6 +35,33 @@
             // Load both templates simultaneously
             await Promise.all([
                 loadTemplate('frontend-view', '../templates/frontend.html'),
+                loadTemplate('admin-panel', '../templates/admin.html')
+            ]);
+            
+            // Now that HTML is loaded, initialize the applications
+            applySeoSettings();
+            frontend.init();
+            
+            // Attach event listeners for view switching
+            document.getElementById('show-admin-panel-link').addEventListener('click', e => { 
+                e.preventDefault(); 
+                document.getElementById('frontend-view').classList.add('hidden'); 
+                document.getElementById('admin-panel').classList.remove('hidden'); 
+                adminPanel.init(); 
+            });
+            document.getElementById('back-to-frontend-btn').addEventListener('click', e => { 
+                e.preventDefault(); 
+                document.getElementById('admin-panel').classList.add('hidden'); 
+                document.getElementById('frontend-view').classList.remove('hidden'); 
+            });
+
+            // Attach ripple animation to all relevant buttons
+            document.querySelectorAll('.btn-buy, .btn-footer, .action-button, .form-btn, .recharge-option, .install-button, #admin-panel .btn-save, #admin-panel .nav-item, #admin-panel .btn-edit, #admin-panel .btn-edit-save, #admin-panel .list-item, #admin-panel .tab, #admin-panel .back-btn')
+                .forEach(button => button.addEventListener("mousedown", createRipple));
+        });
+    </script>
+</body>
+</html>                loadTemplate('frontend-view', '../templates/frontend.html'),
                 loadTemplate('admin-panel', '../templates/admin.html')
             ]);
             
