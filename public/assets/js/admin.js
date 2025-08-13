@@ -1,40 +1,106 @@
-// =================================================================
-// ADMIN PANEL LOGIC
-// =================================================================
+// ===== Admin Panel Logic =====
 const adminPanel = {
     isInitialized: false,
-    
-    showPage: function(pageId) {
-        const adminPanelView = document.getElementById('admin-panel');
-        adminPanelView.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        const page = adminPanelView.querySelector(`#${pageId}`);
-        if (page) page.classList.add('active');
+
+    init: function() {
+        if (this.isInitialized) return;
+        this.attachOriginalEventListeners();
+        this.isInitialized = true;
     },
-    
-    renderLists: function() {
-        const adminPanelView = document.getElementById('admin-panel');
-        const container = adminPanelView.querySelector('#services-list-container');
-        const activeTab = adminPanelView.querySelector('.service-filter-tabs .tab.active').dataset.type;
-        container.innerHTML = '';
-        if (activeTab === 'servers') {
-            if (db.servers.length === 0) container.innerHTML = `<div class="empty-state"><img src="https://i.imgur.com/gK5z2J6.png" alt="No servers"><p>No servers found.</p></div>`;
-            else db.servers.forEach(s => container.insertAdjacentHTML('beforeend', `<div class="card list-item"><div class="info"><div class="icon-bg icon-bg-blue"><img src="https://api.iconify.design/solar:server-square-cloud-bold-duotone.svg"></div><div class="details"><div class="title">${sanitizeHTML(s.serverName)}</div><div class="subtitle">ID: ${s.id} | Country: ${sanitizeHTML(s.serverCountryCode.toUpperCase())}</div></div></div><img src="https://api.iconify.design/solar:alt-arrow-right-linear.svg" class="arrow-icon"></div>`));
-        } else {
-            if (db.services.length === 0) container.innerHTML = `<div class="empty-state"><img src="https://i.imgur.com/gK5z2J6.png" alt="No services"><p>No services found.</p></div>`;
-            else db.services.forEach(s => container.insertAdjacentHTML('beforeend', `<div class="card list-item"><div class="info"><div class="icon-bg icon-bg-green"><img src="https://api.iconify.design/solar:document-add-bold-duotone.svg"></div><div class="details"><div class="title">${sanitizeHTML(s.serviceName)}</div><div class="subtitle">${sanitizeHTML(db.servers.find(srv => srv.id === s.serverId)?.serverName || 'N/A')} | Price: ₹${s.servicePrice}</div></div></div><img src="https://api.iconify.design/solar:alt-arrow-right-linear.svg" class="arrow-icon"></div>`));
-        }
+
+    attachOriginalEventListeners: function() {
+        const ap = this;
+        const doc = document.getElementById('admin-panel');
+
+        // Navigation
+        doc.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => {
+            doc.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            doc.querySelector(`#${item.dataset.page}`).classList.add('active');
+            doc.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+        }));
+
+        // Back buttons
+        doc.querySelectorAll('.back-btn').forEach(btn => btn.addEventListener('click', () => {
+            doc.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            doc.querySelector('#dashboard').classList.add('active');
+        }));
+
+        // Add Server Form
+        doc.querySelector('#add-server-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const serverName = doc.querySelector('#server-name').value.trim();
+            const countryCode = doc.querySelector('#server-country-code').value.trim().toLowerCase();
+            const apiKey = doc.querySelector('#server-api-key').value.trim();
+            const getNumberUrl = doc.querySelector('#server-getnumber-url').value.trim();
+            const getMessageUrl = doc.querySelector('#server-getmessage-url').value.trim();
+            const cancelUrl = doc.querySelector('#server-cancel-url').value.trim();
+            const banUrl = doc.querySelector('#server-ban-url').value.trim();
+            if (!serverName || !countryCode || !apiKey || !getNumberUrl || !getMessageUrl || !cancelUrl || !banUrl) {
+                showMessage('Please fill all server fields', 'error');
+                return;
+            }
+            const newServer = {
+                id: Date.now(),
+                serverName,
+                serverCountryCode: countryCode,
+                apiKey,
+                apiGetNumberUrl: getNumberUrl,
+                apiGetMessageUrl: getMessageUrl,
+                apiCancelUrl: cancelUrl,
+                apiBanUrl: banUrl
+            };
+            db.servers.push(newServer);
+            saveData();
+            showMessage(`Server "${serverName}" added successfully!`, 'success');
+            this.reset();
+        });
+
+        // Add Service Form
+        doc.querySelector('#add-service-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const serverId = parseInt(doc.querySelector('#service-server-id').value);
+            const serviceName = doc.querySelector('#service-name').value.trim();
+            const servicePrice = doc.querySelector('#service-price').value.trim();
+            const serviceCode = doc.querySelector('#service-code').value.trim();
+            const country = doc.querySelector('#service-country').value.trim().toLowerCase();
+            const operator = doc.querySelector('#service-operator').value.trim().toLowerCase();
+            if (!serverId || !serviceName || !servicePrice || !serviceCode || !country || !operator) {
+                showMessage('Please fill all service fields', 'error');
+                return;
+            }
+            const newService = {
+                id: Date.now(),
+                serverId,
+                serviceName,
+                servicePrice,
+                serviceCode,
+                country,
+                operator
+            };
+            db.services.push(newService);
+            saveData();
+            showMessage(`Service "${serviceName}" added successfully!`, 'success');
+            this.reset();
+        });
     },
-    
+
     updateAnalyticsDisplay: function() {
-        const adminPanelView = document.getElementById('admin-panel');
-        const page = adminPanelView.querySelector('#page-analytics'); if (!page) return;
-        page.querySelector('.stat-card .icon-box.users').closest('.card').querySelector('.main-stat').textContent = db.analytics.todaysUsers;
-        page.querySelector('.stat-card .icon-box.users').closest('.card').querySelector('.sub-stat').textContent = `${db.analytics.totalUsers} Total Users`;
-        page.querySelector('.stat-card .icon-box.orders').closest('.card').querySelector('.main-stat').textContent = db.analytics.todaysOrders;
-        page.querySelector('.stat-card .icon-box.orders').closest('.card').querySelector('.sub-stat').textContent = `${frontend.wallet.numbersPurchased} Total Numbers Bought`;
-        page.querySelector('.stat-card .icon-box.payment').closest('.card').querySelector('.main-stat').textContent = `₹${db.analytics.todaysPayment.toFixed(2)}`;
-        page.querySelector('.stat-card .icon-box.payment').closest('.card').querySelector('.sub-stat').textContent = `₹${frontend.wallet.lifetimeRecharge.toFixed(2)} Total Payment Received`;
-    },
+        const doc = document.getElementById('admin-panel');
+        if (!doc.querySelector('#todays-users')) return;
+        doc.querySelector('#todays-users').textContent = db.analytics.todaysUsers;
+        doc.querySelector('#total-users').textContent = db.analytics.totalUsers;
+        doc.querySelector('#todays-orders').textContent = db.analytics.todaysOrders;
+        doc.querySelector('#todays-payment').textContent = db.analytics.todaysPayment.toFixed(2);
+    }
+};
+
+// Init admin panel
+adminPanel.init();
+document.addEventListener('mousedown', e => {
+    if (e.target.matches('#admin-panel .btn-save, #admin-panel .nav-item, #admin-panel .btn-edit, #admin-panel .btn-edit-save, #admin-panel .list-item, #admin-panel .tab, #admin-panel .back-btn'))
+        createRipple(e);
+});    },
     
     init: function() {
         if(this.isInitialized) { this.renderLists(); this.updateAnalyticsDisplay(); this.showPage('page-users'); return; }
