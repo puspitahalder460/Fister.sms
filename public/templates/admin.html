@@ -1,40 +1,13 @@
-<div id="admin-panel">
-    <!-- Sidebar -->
-    <aside>
-        <ul>
-            <li class="nav-item active" data-page="dashboard">Dashboard</li>
-            <li class="nav-item" data-page="add-server">Add Server</li>
-            <li class="nav-item" data-page="add-service">Add Service</li>
-        </ul>
-    </aside>
+<div id="admin-template">
+    <!-- Paste the entire original admin HTML here -->
+    <!-- All admin panel content -->
+</div>
 
-    <!-- Pages -->
-    <main>
-        <!-- Dashboard Page -->
-        <section id="dashboard" class="page active">
-            <h2>Admin Dashboard</h2>
-            <div>Today's Users: <span id="todays-users">0</span></div>
-            <div>Total Users: <span id="total-users">0</span></div>
-            <div>Today's Orders: <span id="todays-orders">0</span></div>
-            <div>Today's Payment: ₹<span id="todays-payment">0.00</span></div>
-        </section>
-
-        <!-- Add Server Page -->
-        <section id="add-server" class="page">
-            <h2>Add Server</h2>
-            <form id="add-server-form">
-                <input type="text" id="server-name" placeholder="Server Name" required>
-                <input type="text" id="server-country-code" placeholder="Country Code (e.g., in)" required>
-                <input type="text" id="server-api-key" placeholder="API Key" required>
-                <input type="text" id="server-getnumber-url" placeholder="API Get Number URL" required>
-                <input type="text" id="server-getmessage-url" placeholder="API Get Message URL" required>
-                <input type="text" id="server-cancel-url" placeholder="API Cancel URL" required>
-                <input type="text" id="server-ban-url" placeholder="API Ban URL" required>
-                <button type="submit" class="btn-save">Save Server</button>
-            </form>
-        </section>
-
-        <!-- Add Service Page -->
+<script>
+// Admin initialization
+document.getElementById('admin-panel').innerHTML = 
+    document.getElementById('admin-template').innerHTML;
+</script>        <!-- Add Service Page -->
         <section id="add-service" class="page">
             <h2>Add Service</h2>
             <form id="add-service-form">
