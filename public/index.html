@@ -4,37 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FisterSMS</title>
-    <meta name="description" content="Buy phone numbers for OTP verification.">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="assets/css/frontend.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link href="/assets/css/frontend.css" rel="stylesheet">
+    <link href="/assets/css/admin.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Frontend view -->
     <div id="frontend-view"></div>
-
-    <!-- Admin panel view -->
     <div id="admin-panel" class="hidden"></div>
 
-    <!-- Templates -->
-    <!-- Frontend Template -->
-    <div id="frontend-template">
-        <!-- This will be replaced with templates/frontend.html -->
-    </div>
-    <!-- Admin Template -->
-    <div id="admin-template">
-        <!-- This will be replaced with templates/admin.html -->
-    </div>
-
-    <!-- JS Files -->
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/admin.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/admin.js"></script>
+    <script>
+    // Initialize with templates
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/templates/frontend.html')
+            .then(r => r.text())
+            .then(html => document.getElementById('frontend-view').innerHTML = html);
+            
+        fetch('/templates/admin.html')
+            .then(r => r.text())
+            .then(html => document.getElementById('admin-panel').innerHTML = html);
+    });
+    </script>
 </body>
-</html>    <!-- Main containers for the app -->
-    <div id="frontend-view"></div>
-    <div id="admin-panel" class="hidden"></div>
+</html>    <div id="admin-panel" class="hidden"></div>
 
     <!-- View Toggle Button -->
     <button id="view-toggle-button" title="Switch View">
