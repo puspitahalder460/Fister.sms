@@ -1,7 +1,6 @@
-/* Universal Helper & Base Styles */
+/* --- FRONTEND CSS --- */
 .hidden { display: none !important; }
 body { font-family: 'Roboto', sans-serif; margin: 0; }
-/* --- START: ORIGINAL FRONTEND CSS --- */
 #frontend-view { background-color: #f8f9fa; }
 #frontend-view #login-section { background-color: #f6f5ff; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; transition: opacity 0.5s ease-out; }
 #frontend-view .login-container { width: 100%; max-width: 450px; background-color: #ffffff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center; }
@@ -19,7 +18,8 @@ body { font-family: 'Roboto', sans-serif; margin: 0; }
 #frontend-view .eye-icon { position: absolute; right: 15px; top: 42px; cursor: pointer; color: #757575; }
 #frontend-view .form-btn { width: 100%; padding: 16px; background: #4b36cc; color: #ffffff; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; margin: 10px 0 25px; }
 #frontend-view .form-link-text a { color: #4b36cc; text-decoration: none; font-weight: 500; }
-#frontend-view .login-form-section { display: none; } #frontend-view .login-form-section.active { display: block; }
+#frontend-view .login-form-section { display: none; } 
+#frontend-view .login-form-section.active { display: block; }
 #frontend-view #loading-spinner { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center; }
 #frontend-view .spinner-content { color: white; font-size: 24px; background: #4b36cc; padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; }
 #frontend-view .spinner-content::after { content: ""; display: inline-block; width: 20px; height: 20px; margin-left: 15px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; }
@@ -30,11 +30,33 @@ body { font-family: 'Roboto', sans-serif; margin: 0; }
 #frontend-view .page-container { max-width: 480px; margin: auto; background-color: var(--card-white); position: relative; overflow-x: hidden; min-height: 100vh; }
 #frontend-view .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100%; background-color: var(--card-white); z-index: 1000; transform: translateX(-100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
 #frontend-view .sidebar.open { transform: translateX(0); }
-#frontend-view .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); } #frontend-view .sidebar-header img { width: 80px; }
+#frontend-view .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); } 
+#frontend-view .sidebar-header img { width: 80px; }
 #frontend-view .sidebar nav { flex-grow: 1; overflow-y: auto; }
-#frontend-view .nav-section { margin-top: 25px; } #frontend-view .nav-section-title { font-size: 12px; font-weight: 700; color: var(--secondary-text); text-transform: uppercase; margin-bottom: 15px; padding: 0 10px; }
-#frontend-view .nav-list { list-style: none; padding: 0; margin: 0; } #frontend-view .nav-item a { display: flex; align-items: center; padding: 12px 10px; text-decoration: none; color: var(--primary-text); font-size: 16px; border-radius: 8px; margin-bottom: 5px; font-weight: 500; cursor: pointer; }
+#frontend-view .nav-section { margin-top: 25px; } 
+#frontend-view .nav-section-title { font-size: 12px; font-weight: 700; color: var(--secondary-text); text-transform: uppercase; margin-bottom: 15px; padding: 0 10px; }
+#frontend-view .nav-list { list-style: none; padding: 0; margin: 0; } 
+#frontend-view .nav-item a { display: flex; align-items: center; padding: 12px 10px; text-decoration: none; color: var(--primary-text); font-size: 16px; border-radius: 8px; margin-bottom: 5px; font-weight: 500; cursor: pointer; }
 #frontend-view .nav-item img { width: 22px; margin-right: 15px; opacity: 0.7; }
+#frontend-view .nav-item.active a { background-color: var(--primary-blue); color: white; } 
+#frontend-view .nav-item.active img { opacity: 1; filter: brightness(0) invert(1); }
+#frontend-view .nav-item:not(.active):hover a { background-color: #f0f0f0; }
+#frontend-view .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; }
+#frontend-view .overlay.open { opacity: 1; pointer-events: auto; }
+#frontend-view .header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: var(--card-white); }
+#frontend-view .menu-icon { font-size: 24px; cursor: pointer; padding: 5px; }
+#frontend-view .header-right { display: flex; align-items: center; gap: 15px; }
+#frontend-view .header-balance { display: flex; align-items: center; background-color: #f5f5f5; border-radius: 20px; padding: 6px 12px 6px 8px; font-weight: 500; }
+#frontend-view .coin-icon { background: #ffc107; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 8px; font-weight: bold; }
+#frontend-view .profile-img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #eee; }
+#frontend-view .page-content { display: none; } 
+#frontend-view .page-content.active { display: block; }
+/* --- Ripple Effect + Animations --- */
+.form-group input, .form-group select, .form-group textarea { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #4b36cc; box-shadow: 0 0 0 3px rgba(75, 54, 204, 0.15); }
+.btn-buy, .btn-footer, .action-button, .form-btn, .recharge-option, .install-button { position: relative; overflow: hidden; z-index: 1; -webkit-tap-highlight-color: transparent; }
+span.ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple-animation 0.6s linear; background-color: rgba(255, 255, 255, 0.7); }
+@keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }#frontend-view .nav-item img { width: 22px; margin-right: 15px; opacity: 0.7; }
 #frontend-view .nav-item.active a { background-color: var(--primary-blue); color: white; } #frontend-view .nav-item.active img { opacity: 1; filter: brightness(0) invert(1); }
 #frontend-view .nav-item:not(.active):hover a { background-color: #f0f0f0; }
 #frontend-view .sidebar-footer { background: linear-gradient(135deg, #e4f0ff, #f6faff); border-radius: var(--border-radius); padding: 15px; text-align: center; }
