@@ -1,25 +1,100 @@
-<!-- Original Frontend HTML Structure with corrected image link -->
-<section id="login-section"><div class="login-container"><div class="app-name">FisterSMS</div><div class="app-tagline">Cheapest Platform</div><div class="form-toggle-buttons"><button id="login-toggle-btn" class="active">Log in</button><button id="register-toggle-btn">Register</button></div><div id="login-form" class="login-form-section active"><div class="or-divider">or</div><form><div class="form-group"><label for="login-email">Email address</label><input type="email" id="login-email" required="" placeholder="Enter your email"></div><div class="form-group"><label for="login-password">Password</label><input type="password" id="login-password" required="" placeholder="Enter your password"><div class="eye-icon"></div></div><button type="submit" class="form-btn">Log in</button></form><div class="form-link-text">Don't have an account? <a href="#">Sign Up</a></div></div><div id="register-form" class="login-form-section"><div class="or-divider">or</div><form><div class="form-group"><label for="register-email">Email address</label><input type="email" id="register-email" required="" placeholder="Enter your email"></div><div class="form-group"><label for="register-password">Password</label><input type="password" id="register-password" required="" placeholder="Create a password"><div class="eye-icon"></div></div><button type="submit" class="form-btn">Create Account</button></form><div class="form-link-text">Already have an account? <a href="#">Log in</a></div></div><div class="form-link-text" style="margin-top: 20px;"><a href="#" id="show-admin-panel-link">Admin Panel</a></div></div></section>
-<section id="app-section" style="display: none;"><div class="page-container"><aside class="sidebar" id="sidebar"><div class="sidebar-header"><img src="https://i.imgur.com/5n2g2fU.png" alt="Logo"></div><nav><div class="nav-section"><h3 class="nav-section-title">Dashboard</h3><ul class="nav-list"><li class="nav-item" data-page="home-page"><a><img src="https://api.iconify.design/solar:home-2-bold-duotone.svg?color=%23666" alt="Home"> Home</a></li></ul></div><div class="nav-section"><h3 class="nav-section-title">Service</h3><ul class="nav-list"><li class="nav-item" data-page="recharge-page"><a><img src="https://api.iconify.design/solar:restart-bold-duotone.svg?color=%23666" alt="Recharge"> Recharge</a></li><li class="nav-item" data-page="buy-number-page"><a><img src="https://api.iconify.design/solar:letter-opened-bold-duotone.svg" alt="Get Number"> Get Number</a></li></ul></div><div class="nav-section"><h3 class="nav-section-title">History</h3><ul class="nav-list"><li class="nav-item"><a><img src="https://api.iconify.design/solar:history-bold-duotone.svg?color=%23666" alt="Number History"> Number History</a></li><li class="nav-item"><a><img src="https://api.iconify.design/solar:wallet-2-bold-duotone.svg?color=%23666" alt="Transaction History"> Transaction History</a></li></ul></div><div class="nav-section"><h3 class="nav-section-title">Extra</h3><ul class="nav-list"><li class="nav-item"><a><img src="https://api.iconify.design/solar:user-plus-rounded-bold-duotone.svg?color=%23666" alt="Refer"> Refer and Earn</a></li><li class="nav-item"><a><img src="https://api.iconify.design/solar:code-scan-bold-duotone.svg?color=%23666" alt="API"> API</a></li><li class="nav-item"><a><img src="https://api.iconify.design/solar:phone-calling-bold-duotone.svg?color=%23666" alt="Contact"> Contact Us</a></li></ul></div></nav><div class="sidebar-footer"><img src="https://i.imgur.com/GzCqj4p.png" alt="Join Telegram" class="footer-img"><button class="join-btn"><img src="https://api.iconify.design/solar:plain-bold.svg?color=white" alt="Telegram" width="18">@otpmart JOIN</button></div></aside><div class="main-content"><header class="header"><span class="menu-icon" id="menu-toggle">☰</span><div class="header-right"><div class="header-balance"><span class="coin-icon">₹</span><span id="wallet-balance-value">0.00</span></div><img src="https://i.imgur.com/6E272tG.png" alt="Profile" class="profile-img" id="user-profile-pic"></div></header><main id="home-page" class="page-content"><div class="card wallet-card"><p class="wallet-title">WALLET</p><h2 class="wallet-amount" id="wallet-card-value">₹0.00</h2><div class="action-buttons"><div class="action-button" data-page="recharge-page"><div class="icon-wrapper recharge"><img src="https://api.iconify.design/solar:restart-bold-duotone.svg?color=%2310c971" alt="Recharge"></div><span>Recharge</span></div><div class="action-button" data-page="buy-number-page"><div class="icon-wrapper otp"><img src="https://api.iconify.design/solar:letter-opened-bold-duotone.svg?color=%234a80ff" alt="OTP"></div><span>OTP</span></div><div class="action-button"><div class="icon-wrapper history"><img src="https://api.iconify.design/solar:history-bold-duotone.svg?color=%23555555" alt="History"></div><span>History</span></div><div class="action-button"><div class="icon-wrapper transactions"><img src="https://api.iconify.design/solar:wallet-2-bold-duotone.svg?color=%23ff9f1c" alt="Transactions"></div><span>Transactions</span></div></div></div><div class="card stats-card"><div class="icon-wrapper recharge-stat"><img src="https://api.iconify.design/solar:restart-bold.svg?color=%234a80ff" alt="Recharge Stat"></div><div class="stats-info"><p class="title">Recharge - Life Time</p><p class="value" id="lifetime-recharge-value">0</p></div></div><div class="card stats-card"><div class="icon-wrapper purchase-stat"><img src="https://api.iconify.design/solar:phone-calling-bold.svg?color=%2317a2b8" alt="Phone Stat"></div><div class="stats-info"><p class="title">Number Purchased - Life Time</p><p class="value" id="numbers-purchased-value">0</p></div></div><div class="card install-banner"><div><h3>For Better Experience,<br>Install Our WebApp</h3><button class="install-button">Install Now</button></div><img src="https://i.ibb.co/hK7JtC0/phone-mockup.png" alt="Phone" class="phone-image"></div></main><main id="buy-number-page" class="page-content"><div class="card buy-number-card"><h2>Buy Number</h2><form id="buy-number-form"><div class="select-wrapper"><label>Select Server</label><div class="select-box"><img id="server-flag-img" src="https://flagcdn.com/in.svg" alt="Indian Flag"><select id="server-select"></select><span class="select-arrow">▼</span></div></div><div class="select-wrapper"><label>Select Service</label><div class="select-box"><select id="service-select"></select><span class="select-arrow">▼</span></div></div><button type="submit" class="btn-buy"><img src="https://api.iconify.design/solar:cart-large-2-bold.svg" alt="Buy Icon" width="20"> Buy</button></form></div><div class="card info-card" id="no-active-number-info"><div class="info-card-text"><h3>No Active Number</h3><p>buy Number Now</p></div><img src="https://i.imgur.com/Kz8E4b4.png" alt="Illustration" class="info-card-img"></div><div id="active-numbers-container"></div></main><main id="recharge-page" class="page-content"><div class="card recharge-methods-card"><h2>Recharge Methods</h2><ul class="recharge-options"><li class="recharge-option" data-method="UPI"><div class="option-icon"><img src="https://i.imgur.com/sSe22c5.png" alt="UPI Icon"></div><div class="option-details"><strong class="title">UPI</strong><span class="subtitle">Phonepe,Paytm,Gpay</span></div><span class="arrow-icon">→</span></li><li class="recharge-option" data-method="TRON"><div class="option-icon"><img src="https://i.imgur.com/fDCa2sM.png" alt="TRON Icon"></div><div class="option-details"><strong class="title">TRON</strong><span class="subtitle">TRC20</span></div><span class="arrow-icon">→</span></li><li class="recharge-option" data-method="USDT"><div class="option-icon"><img src="https://api.iconify.design/cryptocurrency:usdt.svg?color=%2326a17b" alt="USDT Icon"></div><div class="option-details"><strong class="title">USDT</strong><span class="subtitle">SOL</span></div><span class="arrow-icon">→</span></li></ul></div></main></div><div class="overlay" id="overlay"></div></div></section>
-<div class="active-number-card" id="active-number-template" style="display: none;"><div class="card"><div class="active-number-header"><div class="active-number-info"><div class="service-icon"></div><div class="number-details"><span class="number"></span><span class="service-name"></span></div></div><img src="https://api.iconify.design/solar:copy-bold.svg" alt="Copy" class="copy-icon"></div><div class="waiting-box"><span class="status-text">Waiting</span><div class="timer"><img src="https://api.iconify.design/solar:clock-circle-bold.svg" alt="Timer"><span>18:00</span></div></div><div class="action-buttons-footer"><button class="btn-footer btn-next"><img src="https://api.iconify.design/solar:refresh-bold.svg" alt="Next"> Next</button><button class="btn-footer btn-cancel"><img src="https://api.iconify.design/solar:trash-bin-trash-bold.svg" alt="Cancel"> Cancel</button></div></div></div>
-<div id="loading-spinner"><div class="spinner-content">Authenticating</div></div>            <header class="header"><span class="menu-icon" id="menu-toggle">☰</span><div class="header-right"><div class="header-balance"><span class="coin-icon">₹</span><span id="wallet-balance-value">0.00</span></div><img src="https://i.ibb.co/6wmhV9R/profile-pic.png" alt="Profile" class="profile-img" id="user-profile-pic"></div></header>
-            <main id="home-page" class="page-content">
-                <div class="card wallet-card"><p class="wallet-title">WALLET</p><h2 class="wallet-amount" id="wallet-card-value">₹0.00</h2><div class="action-buttons"><div class="action-button" data-page="recharge-page"><div class="icon-wrapper recharge"><img src="https://api.iconify.design/solar:restart-bold-duotone.svg?color=%2310c971" alt="Recharge"></div><span>Recharge</span></div><div class="action-button" data-page="buy-number-page"><div class="icon-wrapper otp"><img src="https://api.iconify.design/solar:letter-opened-bold-duotone.svg?color=%234a80ff" alt="OTP"></div><span>OTP</span></div><div class="action-button"><div class="icon-wrapper history"><img src="https://api.iconify.design/solar:history-bold-duotone.svg?color=%23555555" alt="History"></div><span>History</span></div><div class="action-button"><div class="icon-wrapper transactions"><img src="https://api.iconify.design/solar:wallet-2-bold-duotone.svg?color=%23ff9f1c" alt="Transactions"></div><span>Transactions</span></div></div></div>
-                <div class="card stats-card"><div class="icon-wrapper recharge-stat"><img src="https://api.iconify.design/solar:restart-bold.svg?color=%234a80ff" alt="Recharge Stat"></div><div class="stats-info"><p class="title">Recharge - Life Time</p><p class="value" id="lifetime-recharge-value">0</p></div></div>
-                <div class="card stats-card"><div class="icon-wrapper purchase-stat"><img src="https://api.iconify.design/solar:phone-calling-bold.svg?color=%2317a2b8" alt="Phone Stat"></div><div class="stats-info"><p class="title">Number Purchased - Life Time</p><p class="value" id="numbers-purchased-value">0</p></div></div>
-                <div class="card install-banner"><div><h3>For Better Experience,<br>Install Our WebApp</h3><button class="install-button">Install Now</button></div><img src="https://i.ibb.co/hK7JtC0/phone-mockup.png" alt="Phone" class="phone-image"></div>
-            </main>
-            <main id="buy-number-page" class="page-content">
-                <div class="card buy-number-card"><h2>Buy Number</h2><form id="buy-number-form"><div class="select-wrapper"><label>Select Server</label><div class="select-box"><img id="server-flag-img" src="https://flagcdn.com/in.svg" alt="Indian Flag"><select id="server-select"></select><span class="select-arrow">▼</span></div></div><div class="select-wrapper"><label>Select Service</label><div class="select-box"><select id="service-select"></select><span class="select-arrow">▼</span></div></div><button type="submit" class="btn-buy"><img src="https://api.iconify.design/solar:cart-large-2-bold.svg" alt="Buy Icon" width="20"> Buy</button></form></div>
-                <div class="card info-card" id="no-active-number-info"><div class="info-card-text"><h3>No Active Number</h3><p>buy Number Now</p></div><img src="https://i.imgur.com/Kz8E4b4.png" alt="Illustration" class="info-card-img"></div>
-                <div id="active-numbers-container"></div>
-            </main>
-            <main id="recharge-page" class="page-content">
-                <div class="card recharge-methods-card"><h2>Recharge Methods</h2><ul class="recharge-options"><li class="recharge-option" data-method="UPI"><div class="option-icon"><img src="https://i.imgur.com/sSe22c5.png" alt="UPI Icon"></div><div class="option-details"><strong class="title">UPI</strong><span class="subtitle">Phonepe,Paytm,Gpay</span></div><span class="arrow-icon">→</span></li><li class="recharge-option" data-method="TRON"><div class="option-icon"><img src="https://i.imgur.com/fDCa2sM.png" alt="TRON Icon"></div><div class="option-details"><strong class="title">TRON</strong><span class="subtitle">TRC20</span></div><span class="arrow-icon">→</span></li><li class="recharge-option" data-method="USDT"><div class="option-icon"><img src="https://api.iconify.design/cryptocurrency:usdt.svg?color=%2326a17b" alt="USDT Icon"></div><div class="option-details"><strong class="title">USDT</strong><span class="subtitle">SOL</span></div><span class="arrow-icon">→</span></li></ul></div>
-            </main>
-        </div>
-        <div class="overlay" id="overlay"></div>
+<div id="frontend-view">
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" style="display:none;">
+        <div class="spinner"></div>
     </div>
-</section>
-<div class="active-number-card" id="active-number-template" style="display: none;"><div class="card"><div class="active-number-header"><div class="active-number-info"><div class="service-icon"></div><div class="number-details"><span class="number"></span><span class="service-name"></span></div></div><img src="https://api.iconify.design/solar:copy-bold.svg" alt="Copy" class="copy-icon"></div><div class="waiting-box"><span class="status-text">Waiting</span><div class="timer"><img src="https://api.iconify.design/solar:clock-circle-bold.svg" alt="Timer"><span>18:00</span></div></div><div class="action-buttons-footer"><button class="btn-footer btn-next"><img src="https://api.iconify.design/solar:refresh-bold.svg" alt="Next"> Next</button><button class="btn-footer btn-cancel"><img src="https://api.iconify.design/solar:trash-bin-trash-bold.svg" alt="Cancel"> Cancel</button></div></div></div>
-<div id="loading-spinner"><div class="spinner-content">Authenticating</div></div>
+
+    <!-- Auth Section -->
+    <section id="login-section">
+        <div class="auth-container">
+            <div class="form-toggle-buttons">
+                <button id="login-toggle-btn" class="active">Login</button>
+                <button id="register-toggle-btn">Register</button>
+            </div>
+            <form id="login-form" class="active">
+                <input type="text" placeholder="Username" required>
+                <div class="password-field">
+                    <input type="password" placeholder="Password" required>
+                    <span class="eye-icon">&#128065;</span>
+                </div>
+                <button type="submit" class="form-btn">Login</button>
+            </form>
+            <form id="register-form">
+                <input type="text" placeholder="Username" required>
+                <input type="email" placeholder="Email" required>
+                <div class="password-field">
+                    <input type="password" placeholder="Password" required>
+                    <span class="eye-icon">&#128065;</span>
+                </div>
+                <button type="submit" class="form-btn">Register</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- App Section -->
+    <section id="app-section" style="display:none;">
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="sidebar-header">Menu</div>
+            <ul>
+                <li class="nav-item" data-page="home-page">Home</li>
+                <li class="nav-item" data-page="buy-number-page">Buy Number</li>
+                <li class="nav-item" data-page="wallet-page">Wallet</li>
+            </ul>
+        </div>
+        <div id="overlay"></div>
+
+        <!-- Top Nav -->
+        <header>
+            <button id="menu-toggle">☰</button>
+            <h1>FisterSMS</h1>
+        </header>
+
+        <!-- Pages -->
+        <main>
+            <!-- Home Page -->
+            <div id="home-page" class="page-content active">
+                <h2>Welcome</h2>
+                <div class="action-button" data-page="buy-number-page">Buy Number</div>
+                <div class="action-button" data-page="wallet-page">Wallet</div>
+            </div>
+
+            <!-- Buy Number Page -->
+            <div id="buy-number-page" class="page-content">
+                <h2>Buy Number</h2>
+                <form id="buy-number-form">
+                    <select id="server-select"></select>
+                    <img id="server-flag-img" src="" alt="Flag" style="width:30px;">
+                    <select id="service-select"></select>
+                    <button type="submit" class="btn-buy">Buy</button>
+                </form>
+                <div id="active-numbers-container"></div>
+                <div id="no-active-number-info">No active numbers</div>
+            </div>
+
+            <!-- Wallet Page -->
+            <div id="wallet-page" class="page-content">
+                <h2>Wallet</h2>
+                <div>Balance: ₹<span id="wallet-balance-value">0.00</span></div>
+                <div>Lifetime Recharge: ₹<span id="lifetime-recharge-value">0.00</span></div>
+                <div>Numbers Purchased: <span id="numbers-purchased-value">0</span></div>
+                <div class="recharge-option" data-method="UPI">Recharge via UPI</div>
+                <div class="recharge-option" data-method="Card">Recharge via Card</div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Active Number Template -->
+    <template id="active-number-template">
+        <div class="active-number-card">
+            <div class="service-icon"></div>
+            <div class="number"></div>
+            <div class="service-name"></div>
+            <div class="status-text">Waiting for OTP...</div>
+            <div class="timer">Time left: <span>10:00</span></div>
+            <button class="btn-cancel">Cancel</button>
+            <button class="btn-next">Mark as Used</button>
+            <span class="copy-icon">📋</span>
+        </div>
+    </template>
+</div>
