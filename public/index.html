@@ -6,35 +6,120 @@
     <title>FisterSMS - Dev Test</title>
     <meta name="description" content="Development version for API testing.">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/frontend.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
     <style>
-        /* All original CSS remains unchanged, with the addition of the toggle button style */
-        .hidden { display: none !important; }
-        body { font-family: 'Roboto', sans-serif; margin: 0; }
-        #frontend-view { background-color: #f8f9fa; }
-        #frontend-view .login-container { width: 100%; max-width: 450px; background-color: #ffffff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center; }
-        #frontend-view .app-name { font-size: 2.2rem; font-weight: 700; color: #4b36cc; margin-bottom: 10px; }
-        #frontend-view .app-tagline { color: #757575; font-size: 1rem; margin-bottom: 30px; }
-        #frontend-view .form-toggle-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
-        #frontend-view .form-toggle-buttons button { background: transparent; border: none; padding: 12px 25px; font-size: 16px; font-weight: 600; cursor: pointer; color: #757575; position: relative; }
-        #frontend-view .form-toggle-buttons button.active { color: #4b36cc; }
-        #frontend-view .form-toggle-buttons button.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: #4b36cc; border-radius: 3px; }
-        #frontend-view .or-divider { display: flex; align-items: center; color: #757575; margin: 30px 0; font-size: 14px; }
-        #frontend-view .or-divider::before, #frontend-view .or-divider::after { content: ''; flex: 1; border-bottom: 1px solid #dadce0; }
-        #frontend-view .form-group { text-align: left; margin-bottom: 20px; position: relative; }
-        #frontend-view .form-group label { display: block; font-size: 14px; color: #424242; margin-bottom: 8px; font-weight: 500; }
-        #frontend-view .form-group input { width: 100%; padding: 14px; border: 1px solid #dadce0; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
-        #frontend-view .eye-icon { position: absolute; right: 15px; top: 42px; cursor: pointer; color: #757575; }
-        #frontend-view .form-btn { width: 100%; padding: 16px; background: #4b36cc; color: #ffffff; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; margin: 10px 0 25px; }
-        #frontend-view .form-link-text a { color: #4b36cc; text-decoration: none; font-weight: 500; }
-        #frontend-view .login-form-section { display: none; } #frontend-view .login-form-section.active { display: block; }
-        #frontend-view #loading-spinner { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center; }
-        #frontend-view .spinner-content { color: white; font-size: 24px; background: #4b36cc; padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; }
-        #frontend-view .spinner-content::after { content: ""; display: inline-block; width: 20px; height: 20px; margin-left: 15px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        :root { --primary-blue: #4a80ff; --primary-text: #212529; --secondary-text: #6c757d; --card-white: #ffffff; --border-color: #e9ecef; --border-radius: 12px; --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
-        #frontend-view #app-section, #admin-panel .page.active { animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        #frontend-view .page-container { max-width: 480px; margin: auto; background-color: var(--card-white); position: relative; overflow-x: hidden; min-height: 100vh; }
+        #view-toggle-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #4b36cc;
+            color: white;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+        }
+        #view-toggle-button:hover {
+            transform: scale(1.1);
+        }
+        #view-toggle-button img {
+            width: 32px;
+            height: 32px;
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main containers for the app -->
+    <div id="frontend-view"></div>
+    <div id="admin-panel" class="hidden"></div>
+
+    <!-- View Toggle Button -->
+    <button id="view-toggle-button" title="Switch View">
+        <img src="https://api.iconify.design/solar:user-id-bold-duotone.svg" alt="Switch View">
+    </button>
+
+    <!-- Main script to load and initialize everything -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Function to load HTML templates into the main containers
+            const loadTemplate = async (viewId, filePath) => {
+                const view = document.getElementById(viewId);
+                try {
+                    const response = await fetch(filePath); 
+                    if (!response.ok) throw new Error(`Could not load ${filePath} - Status: ${response.status}`);
+                    view.innerHTML = await response.text();
+                } catch (error) {
+                    view.innerHTML = `<p style="text-align:center;color:red;">Error loading content: ${error.message}</p>`;
+                    console.error(error);
+                }
+            };
+
+            // Function to load a script dynamically
+            const loadScript = (filePath) => {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = filePath;
+                    script.onload = () => resolve();
+                    script.onerror = () => reject(new Error(`Script load error for ${filePath}`));
+                    document.body.appendChild(script);
+                });
+            };
+
+            // Load both templates simultaneously from inside the public folder
+            await Promise.all([
+                loadTemplate('frontend-view', './templates/frontend.html'),
+                loadTemplate('admin-panel', './templates/admin.html')
+            ]);
+            
+            // Now that HTML is loaded, load the scripts IN ORDER
+            await loadScript('./assets/js/app.js');
+            await loadScript('./assets/js/admin.js');
+
+            // Initialize the frontend application by default
+            applySeoSettings();
+            frontend.init(true); // Pass true to skip login
+            
+            // Attach event listener for the view toggle button
+            const toggleBtn = document.getElementById('view-toggle-button');
+            const frontendView = document.getElementById('frontend-view');
+            const adminPanelView = document.getElementById('admin-panel');
+            const toggleIcon = toggleBtn.querySelector('img');
+
+            toggleBtn.addEventListener('click', () => {
+                const isAdminView = adminPanelView.classList.toggle('hidden');
+                frontendView.classList.toggle('hidden', !isAdminView);
+                
+                if (!isAdminView) { // Switched to Admin view
+                    adminPanel.init();
+                    toggleIcon.src = 'https://api.iconify.design/solar:screen-bold-duotone.svg';
+                    toggleBtn.title = "Switch to Frontend";
+                } else { // Switched to Frontend view
+                    toggleIcon.src = 'https://api.iconify.design/solar:user-id-bold-duotone.svg';
+                    toggleBtn.title = "Switch to Admin Panel";
+                }
+            });
+
+            // Attach ripple animation to all relevant buttons
+            const attachRippleListeners = () => {
+                 document.querySelectorAll('.btn-buy, .btn-footer, .action-button, .form-btn, .recharge-option, .install-button, #admin-panel .btn-save, #admin-panel .nav-item, #admin-panel .btn-edit, #admin-panel .btn-edit-save, #admin-panel .list-item, #admin-panel .tab, #admin-panel .back-btn')
+                .forEach(button => button.addEventListener("mousedown", createRipple));
+            };
+            
+            // Since templates are loaded dynamically, we need to ensure listeners are attached after content is present
+            setTimeout(attachRippleListeners, 500);
+        });
+    </script>
+</body>
+</html>        #frontend-view .page-container { max-width: 480px; margin: auto; background-color: var(--card-white); position: relative; overflow-x: hidden; min-height: 100vh; }
         #frontend-view .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100%; background-color: var(--card-white); z-index: 1000; transform: translateX(-100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
         #frontend-view .sidebar.open { transform: translateX(0); }
         #frontend-view .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); } #frontend-view .sidebar-header img { width: 80px; }
