@@ -1,0 +1,79 @@
+/* Universal Helper & Base Styles */
+.hidden { display: none !important; }
+body { font-family: 'Roboto', sans-serif; margin: 0; }
+
+/* --- START: ORIGINAL FRONTEND CSS --- */
+#frontend-view { background-color: #f8f9fa; }
+#frontend-view #login-section { background-color: #f6f5ff; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; transition: opacity 0.5s ease-out; }
+#frontend-view .login-container { width: 100%; max-width: 450px; background-color: #ffffff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center; }
+#frontend-view .app-name { font-size: 2.2rem; font-weight: 700; color: #4b36cc; margin-bottom: 10px; }
+#frontend-view .app-tagline { color: #757575; font-size: 1rem; margin-bottom: 30px; }
+#frontend-view .form-toggle-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+#frontend-view .form-toggle-buttons button { background: transparent; border: none; padding: 12px 25px; font-size: 16px; font-weight: 600; cursor: pointer; color: #757575; position: relative; }
+#frontend-view .form-toggle-buttons button.active { color: #4b36cc; }
+#frontend-view .form-toggle-buttons button.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: #4b36cc; border-radius: 3px; }
+#frontend-view .or-divider { display: flex; align-items: center; color: #757575; margin: 30px 0; font-size: 14px; }
+#frontend-view .or-divider::before, #frontend-view .or-divider::after { content: ''; flex: 1; border-bottom: 1px solid #dadce0; }
+#frontend-view .form-group { text-align: left; margin-bottom: 20px; position: relative; }
+#frontend-view .form-group label { display: block; font-size: 14px; color: #424242; margin-bottom: 8px; font-weight: 500; }
+#frontend-view .form-group input { width: 100%; padding: 14px; border: 1px solid #dadce0; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+#frontend-view .eye-icon { position: absolute; right: 15px; top: 42px; cursor: pointer; color: #757575; }
+#frontend-view .form-btn { width: 100%; padding: 16px; background: #4b36cc; color: #ffffff; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; margin: 10px 0 25px; }
+#frontend-view .form-link-text a { color: #4b36cc; text-decoration: none; font-weight: 500; }
+#frontend-view .login-form-section { display: none; } #frontend-view .login-form-section.active { display: block; }
+#frontend-view #loading-spinner { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center; }
+#frontend-view .spinner-content { color: white; font-size: 24px; background: #4b36cc; padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; }
+#frontend-view .spinner-content::after { content: ""; display: inline-block; width: 20px; height: 20px; margin-left: 15px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+:root { --primary-blue: #4a80ff; --primary-text: #212529; --secondary-text: #6c757d; --card-white: #ffffff; --border-color: #e9ecef; --border-radius: 12px; --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
+#frontend-view #app-section, #admin-panel .page.active { animation: fadeIn 0.4s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+#frontend-view .page-container { max-width: 480px; margin: auto; background-color: var(--card-white); position: relative; overflow-x: hidden; min-height: 100vh; }
+#frontend-view .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100%; background-color: var(--card-white); z-index: 1000; transform: translateX(-100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+#frontend-view .sidebar.open { transform: translateX(0); }
+#frontend-view .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); } #frontend-view .sidebar-header img { width: 80px; }
+#frontend-view .sidebar nav { flex-grow: 1; overflow-y: auto; }
+#frontend-view .nav-section { margin-top: 25px; } #frontend-view .nav-section-title { font-size: 12px; font-weight: 700; color: var(--secondary-text); text-transform: uppercase; margin-bottom: 15px; padding: 0 10px; }
+#frontend-view .nav-list { list-style: none; padding: 0; margin: 0; } #frontend-view .nav-item a { display: flex; align-items: center; padding: 12px 10px; text-decoration: none; color: var(--primary-text); font-size: 16px; border-radius: 8px; margin-bottom: 5px; font-weight: 500; cursor: pointer; }
+#frontend-view .nav-item img { width: 22px; margin-right: 15px; opacity: 0.7; }
+#frontend-view .nav-item.active a { background-color: var(--primary-blue); color: white; } #frontend-view .nav-item.active img { opacity: 1; filter: brightness(0) invert(1); }
+#frontend-view .nav-item:not(.active):hover a { background-color: #f0f0f0; }
+#frontend-view .sidebar-footer { background: linear-gradient(135deg, #e4f0ff, #f6faff); border-radius: var(--border-radius); padding: 15px; text-align: center; }
+#frontend-view .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; }
+#frontend-view .overlay.open { opacity: 1; pointer-events: auto; }
+#frontend-view .header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: var(--card-white); }
+#frontend-view .menu-icon { font-size: 24px; cursor: pointer; padding: 5px; }
+#frontend-view .header-right { display: flex; align-items: center; gap: 15px; }
+#frontend-view .header-balance { display: flex; align-items: center; background-color: #f5f5f5; border-radius: 20px; padding: 6px 12px 6px 8px; font-weight: 500; }
+#frontend-view .coin-icon { background: #ffc107; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 8px; font-weight: bold; }
+#frontend-view .profile-img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #eee; }
+#frontend-view .page-content { display: none; } #frontend-view .page-content.active { display: block; }
+#frontend-view .card { background-color: var(--card-white); border-radius: var(--border-radius); padding: 25px; margin: 20px 15px 0; box-shadow: var(--box-shadow); }
+#frontend-view .wallet-card .wallet-title { font-size: 14px; color: var(--secondary-text); margin: 0 0 10px 0; font-weight: 500; text-transform: uppercase; }
+#frontend-view .wallet-card .wallet-amount { font-size: 28px; font-weight: 700; margin: 0; word-break: break-all; color: var(--primary-text); }
+#frontend-view .action-buttons { display: flex; justify-content: space-around; margin-top: 25px; text-align: center; } 
+#frontend-view .action-button .icon-wrapper { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 8px auto; }
+#frontend-view .action-button .icon-wrapper img { width: 24px; height: 24px; }
+#frontend-view .action-button span { font-size: 14px; font-weight: 500; color: var(--primary-text); }
+#frontend-view .action-button .recharge { background-color: #e0f8e9; }
+#frontend-view .action-button .otp { background-color: #e4eefe; }
+#frontend-view .action-button .history { background-color: #f1f1f1; }
+#frontend-view .action-button .transactions { background-color: #fff4e0; }
+#frontend-view .stats-card { display: flex; align-items: center; gap: 20px; }
+#frontend-view .stats-card .icon-wrapper { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+#frontend-view .stats-card .icon-wrapper img { width: 24px; height: 24px; }
+#frontend-view .stats-card .stats-info .title { font-size: 14px; color: var(--secondary-text); margin: 0 0 5px 0; }
+#frontend-view .stats-card .stats-info .value { font-size: 22px; font-weight: 700; margin: 0; color: var(--primary-text); }
+#frontend-view .stats-card .recharge-stat { background-color: #e4eefe; }
+#frontend-view .stats-card .purchase-stat { background-color: #dff6ff; }
+#frontend-view .install-banner { display: flex; justify-content: space-between; align-items: center; background-color: #f0f5ff; padding: 20px; }
+#frontend-view .install-banner h3 { font-size: 16px; margin: 0 0 15px 0; line-height: 1.4; }
+#frontend-view .install-banner .install-button { background-color: var(--primary-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; }
+#frontend-view .install-banner .phone-image { width: 100px; height: auto; }
+#frontend-view .buy-number-card h2 { font-size: 24px; margin-top: 0; margin-bottom: 25px; }
+#frontend-view .select-wrapper { position: relative; margin-bottom: 20px; }
+#frontend-view .select-wrapper label { font-size: 13px; color: var(--secondary-text); margin-bottom: 8px; display: block; padding-left: 5px;}
+#frontend-view .select-wrapper .select-box { display: flex; align-items: center; width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+#frontend-view .select-wrapper .select-box img { width: 24px; margin-right: 10px; }
+#frontend-view .select-wrapper select { border: none; outline: none; background: transparent; width: 100%; appearance: none; -webkit-appearance: none; font-size: 16px; font-weight: 500; cursor: pointer; }
+#frontend-view .select-wrapper .select-arrow { position: absolute; righ
